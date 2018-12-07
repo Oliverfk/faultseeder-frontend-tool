@@ -7,7 +7,6 @@ import {
 } from 'react-bootstrap';
 // eslint-disable-next-line import/default
 import formStyles from '../styles/loginForm.css';
-import _ from 'lodash';
 
 const UserLoginForm = props => {
   const {userName, passWord, submitted, emptyChecked, onValueChange, onLogin, showPassword,
@@ -76,6 +75,7 @@ UserLoginForm.propTypes = {
   submitted: PropTypes.bool,
   isPasswordShown: PropTypes.bool,
   emptyChecked: PropTypes.bool,
+  passWordLenValidation: PropTypes.string,
   onLogin: PropTypes.func,
   onValueChange: PropTypes.func,
   showPassword: PropTypes.func

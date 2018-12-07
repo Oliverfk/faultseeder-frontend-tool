@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import UserLoginForm from './UserLoginForm';
+import { browserHistory } from 'react-router';
 import _ from 'lodash';
 
 class LoginPage extends Component {
@@ -24,12 +25,9 @@ class LoginPage extends Component {
     this.setState({[id]: value});
   }
 
-
-
   passWordLenValidation() {
     const {passWord} = this.state;
     const length = passWord.length;
-    console.log(length);
     if (length >= 8) return 'success';
     else if (length < 8 && length > 0) return 'error';
     return null;
@@ -43,8 +41,9 @@ class LoginPage extends Component {
     event.preventDefault();
     const {userName, passWord, emptyChecked} = this.state;
     this.setState({emptyChecked: true});
-    if (emptyChecked && !_.isEmpty(userName) && !_.isEmpty(passWord)) {
+    if (!_.isEmpty(userName) && passWord.length >= 8) {
       this.setState({submitted: true});
+      browserHistory.push(`/experiment/tool.faultSeeder/userId/${userName}`);
     }
     console.log("login");
   }
@@ -52,7 +51,7 @@ class LoginPage extends Component {
   render() {
     const {userName, passWord, submitted, emptyChecked,isPasswordShown} = this.state;
     return (
-      <div>
+      <div className="col-sm-8 col-sm-offset-2">
         <UserLoginForm
           userName={userName}
           passWord={passWord}
